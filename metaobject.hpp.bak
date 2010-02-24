@@ -1,0 +1,68 @@
+#ifndef METAOBJECT_HPP
+#define METAOBJECT_HPP
+
+#include <iostream>
+#include <string>
+#include <stdexcept>
+#include <map>
+
+#include <boost/smart_ptr.hpp>
+#include <boost/any.hpp>
+
+#include "metaclass.hpp"
+#include "metacontext.hpp"
+#include "tuple_util.hpp"
+
+using namespace std;
+using namespace boost;
+
+struct MetaState;
+struct MetaContext;
+
+class MetaClass;
+
+class MetaObject : public MetaClass{
+    friend MetaObject New(const MetaClass &cls);
+
+    private:
+    shared_ptr<MetaState> _state;
+
+    MetaObject(const MetaClass &cls): MetaClass(cls.GetName()) {
+        _methods=static_cast<const MetaObject*>(&cls)->_methods;
+        _state.reset(new MetaState());
+    }
+    template<typename Tparam> void CallCtor(Tparam param){
+        if(_methods.count("ctor")==1)Call<void>("ctor",param);
+    }
+    void CallCtor();
+
+    public:
+    MetaObject(const MetaObject &o): MetaClass(o.GetName()), _state(o._state) {}
+
+    template<typename Tret, typename Tparam> Tret Call(const string &mname, Tparam arg){
+        if(_methods.count(mname)<1) throw std::exception();
+        PolyWrapper<IFnWrap> fn=_methods[mname];
+        if(!fn().TypeCheck(typeid(Tret),typeid(Tparam))){
+            throw std::exception();
+        }
+        MetaInfo ifo(*_state, MetaContext(mname, *this, MkConvert(arg)));
+        return any_cast<Tret>(fn().Call(ifo, arg));
+    }
+    template<typename Tret> Tret Call(const string &mname, many args){
+        if(_methods.count(mname)<1) throw std::exception();
+        PolyWrapper<IFnWrap> fn=_methods[mname];
+        MetaInfo ifo(*_state, MetaContext(mname, *this, MkConvert(args)));
+        return any_cast<Tret>(fn().Call(ifo, args));
+    }
+    template<typename Tparam> void Call(const string &mname, Tparam arg){
+        Call<NO_RETURN>(mname, arg);
+    }
+        template<typename Tret> Tret Call(const string &mname){
+        return Call<Tret>(mname, NullValue);
+    }
+    any Call(const string &mname, many args);
+    void Call(const string &mname);
+    MetaObject Copy();
+};
+
+#endif // METAOBJECT_HPP

@@ -1,0 +1,11 @@
+#ifndef EXCEPTIONS_HPP_INCLUDED
+#define EXCEPTIONS_HPP_INCLUDED
+
+#include <stdexcept>
+
+using namespace std;
+
+namespace Exceptions{
+}
+
+#endif // EXCEPTIONS_HPP_INCLUDED

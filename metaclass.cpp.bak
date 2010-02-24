@@ -1,0 +1,17 @@
+#include "metaclass.hpp"
+#include "metaobject.hpp"
+
+MetaObject New(const MetaClass &cls){
+    MetaObject mo(cls);
+    mo.CallCtor();
+    return mo;
+}
+
+string MetaClass::GetName() const{
+    return _name;
+}
+
+Caller MetaClass::operator[](const string &mname){
+    if(!_methods[mname]().IsStatic()) throw exception();
+    return Caller(mname, _methods[mname], MetaContext(mname, *this), _staticstate);
+}

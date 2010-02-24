@@ -1,0 +1,50 @@
+#ifndef UTIL_HPP
+#define UTIL_HPP
+
+#define MK_FNPTR(R, P, name) R(*name)(MetaInfo, P)
+#define MK_FNPTR_T(R, P) R(*)(MetaInfo, P)
+#define NO_PARAMS const NullType
+#define NO_RETURN NullType
+#define META_METHOD(N, R, P) R N(MetaInfo info, P args)
+#define Q(...) __VA_ARGS__
+
+#include <typeinfo>
+#include <boost/foreach.hpp>
+#define foreach BOOST_FOREACH
+
+using namespace std;
+
+struct NullType
+{
+    NullType(){}
+    template<typename T> NullType(const T&){}
+    template<typename T> operator T() const
+    {
+        return T();
+    }
+};
+const NullType NullValue=NullType();
+const NullType Nothing=NullType();
+
+class ITypeInfo
+{
+public:
+    virtual ~TypeInfo(){}
+    virtual bool operator==(const ITypeInfo &rhs) const=0;
+    virtual bool operator!=(const ITypeInfo &rhs) const=0;
+    virtual bool before(const ITypeInfo &rhs) const=0;
+    const string name() const=0;
+    const type_info& Info() const=0;
+};
+
+template<typename T> class TypeInfo : public ITypeInfo{
+    public:
+        bool operator==(const ITypeInfo &rhs) const{
+            return typeid(T)==rhs.Info();
+        }
+        bool operator!=(const ITypeInfo &rhs) const{
+            return typeid(T)!=rhs.Info();
+        }
+};
+
+#endif // UTIL_HPP

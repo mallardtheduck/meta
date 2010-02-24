@@ -1,0 +1,54 @@
+#ifndef DBGFNWRAP_HPP
+#define DBGFNWRAP_HPP
+
+#include <typeinfo>
+#include <iostream>
+#include "comp_util.hpp"
+
+#include "fnwrap.hpp"
+
+using namespace std;
+
+template <typename Tret, typename Tparam>
+        class DbgFnWrap : public IFnWrap{
+    public:
+    bool TypeCheck(const type_info &retType, const type_info &paramType){
+        if(retType==TypeID<Tret>() && paramType==TypeID<Tparam>()) return true;
+        else return false;
+    }
+    any Call(MetaInfo &info, any args){
+        const Tparam &cargs=any_cast<Tparam>(args);
+        cout << "Meta function call to: " << info.Context.Class.GetName() << "::" << info.Context.MethodName << endl;
+        if(_static) cout << "Method is STATIC." << endl;
+        cout << "Argument types:" << endl;
+        OutTupleTypes(Tparam());
+        cout << "Arguments:" << (Tparam)cargs << endl;
+        cout << "Return type:" << TypeID<Tret>().name() << endl;
+        return Tret();
+    }
+    any Call(MetaInfo &info, many args){
+        return Call(info, many_to_tuple<Tparam>(args));
+    }
+};
+
+template <typename Tret>
+        class DbgFnWrap<Tret, const NullType> : public IFnWrap{
+    public:
+    bool TypeCheck(const type_info &retType, const type_info &paramType){
+        if(retType==TypeID(Tret) && paramType==TypeID(const NullType)) return true;
+        else return false;
+    }
+    any Call(MetaInfo &info, any args){
+        cout << "Meta function call to: " << info.Context.Class.GetName() << "::" << info.Context.MethodName << endl;
+        if(_static) cout << "Method is STATIC." << endl;
+        cout << "No arguements." << endl;
+        cout << "Return type:" << demangle(TypeID(Tret).name()) << endl;
+        return Tret();
+    }
+    any Call(MetaInfo &info, many args){
+        return Call(info, any(NullValue));
+    }
+};
+
+
+#endif // DBGFNWRAP_HPP
