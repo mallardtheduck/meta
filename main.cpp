@@ -1,16 +1,11 @@
-#include "metaclass.hpp"
-#include "metaobject.hpp"
-#include "new.hpp"
-#include "stdfnwrap.hpp"
-#include "dbgfnwrap.hpp"
-#include "comp_util.hpp"
-#include "iface.hpp"
+#include "meta.hpp"
 #include "test.hpp"
 
 #include <iostream>
 
 using namespace std;
 using namespace boost;
+using namespace meta;
 
 #include "tuple_util.hpp"
 
@@ -72,39 +67,42 @@ int main(int argc, char** argv)
 
     TEST("Interface match", ifoo.IsMatch(foo));
     bool staticworked=false;
-    try{
+    try
+    {
         foo["static"].Call();
         staticworked=true;
-    }catch(std::exception &e){
+    }
+    catch (std::exception &e)
+    {
         staticworked=false;
     }
     TEST("Static call", staticworked);
     MetaObject objfoo=New(foo);
     TEST("Construction", ifoo.IsMatch(objfoo));
     TEST_R("Call with parameters/return",
-        objfoo["bar"].Call<string>(make_tuple(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
+           objfoo["bar"].Call<string>(make_tuple(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
 
     MethodInfo barinfo=objfoo.GetMethodInfo("bar");
     TEST("Reflectivity",barinfo==foo.GetMethodInfo("bar"));
     TEST_R("Reflection return type", barinfo.GetReturnType()().Name(), TypeID<string>().Name());
     TEST_R("Reflection param types", barinfo.GetParamType(0)().Name(), TypeID<int>().Name());
     TEST_R("Call from reflection",
-        barinfo.MakeCaller(objfoo).Call<string>(make_tuple(3, string("ho!"))),
-        string("Hello world!ho!ho!ho!"));
+           barinfo.MakeCaller(objfoo).Call<string>(make_tuple(3, string("ho!"))),
+           string("Hello world!ho!ho!ho!"));
 
-/*    MetaClass dbgClass("DebugClass");
-    dbgClass.AddMethod("ctor", DbgFnWrap<NO_RETURN, NO_PARAMS>());
-    dbgClass.AddMethod("DoSomething", DbgFnWrap<int, tuple<int, int> >());
-    MetaObject dbgObj=New(dbgClass);
-    dbgObj["DoSomething"].Call<int>(make_tuple(1,2));
+    /*    MetaClass dbgClass("DebugClass");
+        dbgClass.AddMethod("ctor", DbgFnWrap<NO_RETURN, NO_PARAMS>());
+        dbgClass.AddMethod("DoSomething", DbgFnWrap<int, tuple<int, int> >());
+        MetaObject dbgObj=New(dbgClass);
+        dbgObj["DoSomething"].Call<int>(make_tuple(1,2));
 
-    out_tuple(make_tuple(3.76, "Hello world!", string("HAHA")));
+        out_tuple(make_tuple(3.76, "Hello world!", string("HAHA")));
 
-    many m=tuple_to_many(make_tuple(4.5,(short)3,900000000,string("Hiya!"),'c', 0xfeedbabe, false, Nothing));
-    for (size_t i=0; i<m.size(); i++)
-    {
-        cout << demangle(m[i].type().name()) << endl;
-    }*/
+        many m=tuple_to_many(make_tuple(4.5,(short)3,900000000,string("Hiya!"),'c', 0xfeedbabe, false, Nothing));
+        for (size_t i=0; i<m.size(); i++)
+        {
+            cout << demangle(m[i].type().name()) << endl;
+        }*/
 
     string garb;
     getline(cin, garb);

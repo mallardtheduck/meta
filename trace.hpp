@@ -4,16 +4,19 @@
 #include <sstream>
 #include <string>
 
-class cerr_at_end{
-    private:
-        std::string _msg;
-    public:
-        cerr_at_end(std::string msg){
-            _msg=msg;
-        }
-        ~cerr_at_end(){
-            std::cerr << _msg << std::endl;
-        }
+class cerr_at_end
+{
+private:
+    std::string _msg;
+public:
+    cerr_at_end(std::string msg)
+    {
+        _msg=msg;
+    }
+    ~cerr_at_end()
+    {
+        std::cerr << _msg << std::endl;
+    }
 };
 
 #define Q(x) #x

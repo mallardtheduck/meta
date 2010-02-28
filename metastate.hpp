@@ -7,8 +7,13 @@
 using namespace std;
 using namespace boost;
 
-struct MetaState{
-    map<string, any> Members;
-};
+namespace meta
+{
 
+    struct MetaState
+    {
+        map<string, any> Members;
+    };
+
+}
 #endif // METASTATE_HPP_INCLUDED

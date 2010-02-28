@@ -55,7 +55,11 @@
 		<Unit filename="fnwrap.hpp" />
 		<Unit filename="iface.hpp" />
 		<Unit filename="list.hpp" />
-		<Unit filename="main.cpp" />
+		<Unit filename="main.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="meta.hpp" />
 		<Unit filename="metaclass.cpp" />
 		<Unit filename="metaclass.hpp" />
 		<Unit filename="metacontext.hpp" />
@@ -67,7 +71,6 @@
 		<Unit filename="stdfnwrap.hpp" />
 		<Unit filename="test.hpp" />
 		<Unit filename="trace.hpp" />
-		<Unit filename="tuple_test.hpp" />
 		<Unit filename="tuple_util.hpp" />
 		<Unit filename="util.hpp" />
 		<Extensions>

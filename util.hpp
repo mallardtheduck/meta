@@ -1,11 +1,11 @@
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
-#define MK_FNPTR(R, P, name) R(*name)(MetaInfo, P)
-#define MK_FNPTR_T(R, P) R(*)(MetaInfo, P)
+#define MK_FNPTR(R, P, name) R(*name)(meta::MetaInfo, P)
+#define MK_FNPTR_T(R, P) R(*)(meta::MetaInfo, P)
 #define NO_PARAMS const NullType
 #define NO_RETURN NullType
-#define META_METHOD(N, R, P) R N(MetaInfo info, P args)
+#define META_METHOD(N, R, P) R N(meta::MetaInfo info, P args)
 #define Q(...) __VA_ARGS__
 
 #include <typeinfo>

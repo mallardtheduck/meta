@@ -17,31 +17,37 @@
 using namespace std;
 using namespace boost;
 
-struct MetaState;
-struct MetaContext;
+namespace meta
+{
 
-class MetaClass;
+    struct MetaState;
+    struct MetaContext;
 
-class MetaObject : public MetaClass{
-    friend MetaObject New(const MetaClass &cls);
+    class MetaClass;
+
+    class MetaObject : public MetaClass
+    {
+        friend MetaObject New(const MetaClass &cls);
 
     private:
-    shared_ptr<MetaState> _state;
+        shared_ptr<MetaState> _state;
 
-    MetaObject(const MetaClass &cls): MetaClass(cls.GetName()) {
-        _methods=static_cast<const MetaObject*>(&cls)->_methods;
-        _state.reset(new MetaState());
-    }
-    void CallCtor();
+        MetaObject(const MetaClass &cls): MetaClass(cls.GetName())
+        {
+            _methods=static_cast<const MetaObject*>(&cls)->_methods;
+            _state.reset(new MetaState());
+        }
+        void CallCtor();
 
     public:
-    MetaObject(const MetaObject &o): MetaClass(o.GetName()), _state(o._state) {}
-    Caller operator[](const string &mname) const;
-    MetaObject Copy();
+        MetaObject(const MetaObject &o): MetaClass(o.GetName()), _state(o._state) {}
+        Caller operator[](const string &mname) const;
+        MetaObject Copy();
 
-    template<typename Tparam> void CallCtor(Tparam param){
-        if(_methods.count("ctor")==1) operator[]("ctor").Call<void>(param);
-    }
-};
-
+        template<typename Tparam> void CallCtor(Tparam param)
+        {
+            if (_methods.count("ctor")==1) operator[]("ctor").Call<void>(param);
+        }
+    };
+}
 #endif // METAOBJECT_HPP

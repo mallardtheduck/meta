@@ -16,23 +16,33 @@ using namespace boost;
 using namespace std;
 using namespace tuples;
 
-class MetaInfo;
+namespace meta
+{
 
-class IFnWrap{
+    class MetaInfo;
+
+    class IFnWrap
+    {
     protected:
-    bool _static;
+        bool _static;
     public:
-    IFnWrap() : _static(false) {}
-    virtual bool TypeCheck(const ITypeInfo &retType, const ITypeInfo &paramType)=0;
-    virtual any Call(MetaInfo &info, any args)=0;
-    virtual any Call(MetaInfo &info, many args)=0;
+        IFnWrap() : _static(false) {}
+        virtual bool TypeCheck(const ITypeInfo &retType, const ITypeInfo &paramType)=0;
+        virtual any Call(MetaInfo &info, any args)=0;
+        virtual any Call(MetaInfo &info, many args)=0;
 
-    virtual PolyWrapper<ITypeInfo> GetReturnType()=0;
-    virtual vector<PolyWrapper<ITypeInfo> > GetParamTypes()=0;
+        virtual PolyWrapper<ITypeInfo> GetReturnType()=0;
+        virtual vector<PolyWrapper<ITypeInfo> > GetParamTypes()=0;
 
-    virtual bool IsStatic(){return _static;}
-    virtual void SetStatic(bool s){_static=s;}
-    virtual ~IFnWrap(){}
-};
-
+        virtual bool IsStatic()
+        {
+            return _static;
+        }
+        virtual void SetStatic(bool s)
+        {
+            _static=s;
+        }
+        virtual ~IFnWrap(){}
+    };
+}
 #endif // FNWRAP_HPP

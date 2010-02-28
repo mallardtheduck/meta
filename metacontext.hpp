@@ -16,21 +16,27 @@
 using namespace std;
 using namespace boost;
 
-class MetaObject;
-class MetaClass;
+namespace meta
+{
 
-struct MetaContext{
-    string MethodName;
-    const MetaClass &Class;
-    PolyWrapper<ITupleManyConvert> ManyArgs;
-    MetaContext(string mname, const MetaClass &cls) :
-            MethodName(mname),  Class(cls) {}
-};
+    class MetaObject;
+    class MetaClass;
 
-struct MetaInfo{
-    MetaState &State;
-    MetaContext Context;
-    MetaInfo(MetaState &state, MetaContext context):State(state), Context(context){}
-};
+    struct MetaContext
+    {
+        string MethodName;
+        const MetaClass &Class;
+        PolyWrapper<ITupleManyConvert> ManyArgs;
+        MetaContext(string mname, const MetaClass &cls) :
+                MethodName(mname),  Class(cls) {}
+    };
 
+    struct MetaInfo
+    {
+        MetaState &State;
+        MetaContext Context;
+        MetaInfo(MetaState &state, MetaContext context):State(state), Context(context){}
+    };
+
+}
 #endif // METACONTEXT_HPP

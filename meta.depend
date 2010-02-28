@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1267354841 source:/home/mallard/Projects/meta/metaclass.cpp
+1267368518 source:/home/mallard/Projects/meta/metaclass.cpp
 	"metaclass.hpp"
 	"metaobject.hpp"
 	"exceptions.hpp"
 
-1267354523 /home/mallard/Projects/meta/metaclass.hpp
+1267368585 /home/mallard/Projects/meta/metaclass.hpp
 	<string>
 	<vector>
 	<map>
@@ -16,15 +16,15 @@
 	"metacontext.hpp"
 	"caller.hpp"
 
-1263912588 /home/mallard/Projects/meta/util.hpp
+1267368687 /home/mallard/Projects/meta/util.hpp
 	<typeinfo>
 	<boost/foreach.hpp>
 	"comp_util.hpp"
 	"polywrapper.hpp"
 
-1262735561 /home/mallard/Projects/meta/polywrapper.hpp
+1267368619 /home/mallard/Projects/meta/polywrapper.hpp
 
-1267355074 /home/mallard/Projects/meta/fnwrap.hpp
+1267368564 /home/mallard/Projects/meta/fnwrap.hpp
 	<iostream>
 	<typeinfo>
 	<boost/any.hpp>
@@ -34,7 +34,7 @@
 	"metacontext.hpp"
 	"tuple_util.hpp"
 
-1267355409 /home/mallard/Projects/meta/metacontext.hpp
+1267368589 /home/mallard/Projects/meta/metacontext.hpp
 	<string>
 	<map>
 	<boost/any.hpp>
@@ -42,7 +42,7 @@
 	"metaclass.hpp"
 	"tuple_util.hpp"
 
-1263912507 /home/mallard/Projects/meta/tuple_util.hpp
+1267368640 /home/mallard/Projects/meta/tuple_util.hpp
 	<boost/any.hpp>
 	<boost/tuple/tuple.hpp>
 	<boost/tuple/tuple_io.hpp>
@@ -50,7 +50,7 @@
 	"comp_util.hpp"
 	"util.hpp"
 
-1267354744 /home/mallard/Projects/meta/metaobject.hpp
+1267368596 /home/mallard/Projects/meta/metaobject.hpp
 	<iostream>
 	<string>
 	<stdexcept>
@@ -62,32 +62,26 @@
 	"tuple_util.hpp"
 	"caller.hpp"
 
-1267354773 source:/home/mallard/Projects/meta/metaobject.cpp
+1267368524 source:/home/mallard/Projects/meta/metaobject.cpp
 	"metaobject.hpp"
 	"exceptions.hpp"
 
-1267356832 source:/home/mallard/Projects/meta/main.cpp
-	"metaclass.hpp"
-	"metaobject.hpp"
-	"new.hpp"
-	"stdfnwrap.hpp"
-	"dbgfnwrap.hpp"
-	"comp_util.hpp"
-	"iface.hpp"
+1267368510 source:/home/mallard/Projects/meta/main.cpp
+	"meta.hpp"
 	"test.hpp"
 	<iostream>
 	"tuple_util.hpp"
 
-1259660990 /home/mallard/Projects/meta/new.hpp
+1267368608 /home/mallard/Projects/meta/new.hpp
 	"metaclass.hpp"
 	"metaobject.hpp"
 
-1267355216 /home/mallard/Projects/meta/stdfnwrap.hpp
+1267368623 /home/mallard/Projects/meta/stdfnwrap.hpp
 	"polywrapper.hpp"
 	"fnwrap.hpp"
 	"tuple_util.hpp"
 
-1267355235 /home/mallard/Projects/meta/dbgfnwrap.hpp
+1267368541 /home/mallard/Projects/meta/dbgfnwrap.hpp
 	<typeinfo>
 	<iostream>
 	<vector>
@@ -95,15 +89,15 @@
 	"util.hpp"
 	"fnwrap.hpp"
 
-1259664980 /home/mallard/Projects/meta/comp_util.hpp
+1267368534 /home/mallard/Projects/meta/comp_util.hpp
 	<string>
 	<cxxabi.h>
 
-1263911922 source:/home/mallard/Projects/meta/caller.cpp
+1267368506 source:/home/mallard/Projects/meta/caller.cpp
 	"caller.hpp"
 	"exceptions.hpp"
 
-1263911374 /home/mallard/Projects/meta/caller.hpp
+1267368529 /home/mallard/Projects/meta/caller.hpp
 	<string>
 	"util.hpp"
 	"metacontext.hpp"
@@ -111,11 +105,11 @@
 	"tuple_util.hpp"
 	"exceptions.hpp"
 
-1262733138 /home/mallard/Projects/meta/metastate.hpp
+1267368603 /home/mallard/Projects/meta/metastate.hpp
 	<map>
 	<boost/any.hpp>
 
-1262736684 /home/mallard/Projects/meta/iface.hpp
+1267368569 /home/mallard/Projects/meta/iface.hpp
 	<string>
 	<vector>
 	"metaclass.hpp"
@@ -123,10 +117,19 @@
 	"polywrapper.hpp"
 	"util.hpp"
 
-1263037438 /home/mallard/Projects/meta/exceptions.hpp
+1267368560 /home/mallard/Projects/meta/exceptions.hpp
 	<stdexcept>
 
-1267356318 /home/mallard/Projects/meta/test.hpp
+1267368630 /home/mallard/Projects/meta/test.hpp
 	<string>
 	<iostream>
+
+1267368581 /home/mallard/Projects/meta/meta.hpp
+	"metaclass.hpp"
+	"metaobject.hpp"
+	"iface.hpp"
+	"new.hpp"
+	"stdfnwrap.hpp"
+	"dbgfnwrap.hpp"
+	"comp_util.hpp"
 
