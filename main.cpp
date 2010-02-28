@@ -5,15 +5,13 @@
 
 using namespace std;
 using namespace boost;
-using namespace meta;
 
 #include "tuple_util.hpp"
 
 META_METHOD(foo_ctor, NO_RETURN, NO_PARAMS)
 {
     cout << "foo created." << endl;
-    MEM_INIT(string, bla);
-    bla="Hello world!";
+    MEM_INIT_VAL(string, bla, "Hello world!");
     return Nothing;
 }
 
@@ -55,15 +53,15 @@ template<typename T> void out_tuple(T tup)
 
 int main(int argc, char** argv)
 {
-    MetaClass foo("Foo");
-    foo.AddStatic("static", StdFn(foo_static));
-    foo.AddMethod("ctor", StdFn(foo_ctor));
-    foo.AddMethod("bar", StdFn(foo_bar));
-    foo.AddMethod("set", StdFn(foo_set));
-    foo.AddMethod("print", StdFn(foo_print));
-    MetaIface ifoo;
-    ifoo.AddMethod(IfaceMethod<NO_RETURN, NO_PARAMS>("static",true));
-    ifoo.AddMethod(IfaceMethod<string, tuple<int, string> >("bar"));
+    meta::MetaClass foo("Foo");
+    foo.AddStatic("static", meta::StdFn(foo_static));
+    foo.AddMethod("ctor", meta::StdFn(foo_ctor));
+    foo.AddMethod("bar", meta::StdFn(foo_bar));
+    foo.AddMethod("set", meta::StdFn(foo_set));
+    foo.AddMethod("print", meta::StdFn(foo_print));
+    meta::MetaIface ifoo;
+    ifoo.AddMethod(meta::IfaceMethod<NO_RETURN, NO_PARAMS>("static",true));
+    ifoo.AddMethod(meta::IfaceMethod<string, tuple<int, string> >("bar"));
 
     TEST("Interface match", ifoo.IsMatch(foo));
     bool staticworked=false;
@@ -77,12 +75,12 @@ int main(int argc, char** argv)
         staticworked=false;
     }
     TEST("Static call", staticworked);
-    MetaObject objfoo=New(foo);
+    meta::MetaObject objfoo=meta::New(foo);
     TEST("Construction", ifoo.IsMatch(objfoo));
     TEST_R("Call with parameters/return",
            objfoo["bar"].Call<string>(make_tuple(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
 
-    MethodInfo barinfo=objfoo.GetMethodInfo("bar");
+    meta::MethodInfo barinfo=objfoo.GetMethodInfo("bar");
     TEST("Reflectivity",barinfo==foo.GetMethodInfo("bar"));
     TEST_R("Reflection return type", barinfo.GetReturnType()().Name(), TypeID<string>().Name());
     TEST_R("Reflection param types", barinfo.GetParamType(0)().Name(), TypeID<int>().Name());

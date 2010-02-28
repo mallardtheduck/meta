@@ -11,6 +11,7 @@
 #include "tuple_util.hpp"
 
 #define MEM_INIT(t,x) info.State.Members[#x]=t(); MEM(t,x)
+#define MEM_INIT_VAL(t,x,v) info.State.Members[#x]=t(v); MEM(t,x)
 #define MEM(t,x) t &x=any_cast<t&>(info.State.Members[#x])
 
 using namespace std;
