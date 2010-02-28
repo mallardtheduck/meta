@@ -22,7 +22,7 @@
 	<File name="iface.hpp" open="0" top="0" tabpos="3">
 		<Cursor position="656" topLine="19" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1">
+	<File name="main.cpp" open="1" top="1" tabpos="1">
 		<Cursor position="1031" topLine="74" />
 	</File>
 	<File name="metaclass.cpp" open="1" top="0" tabpos="1">
@@ -31,10 +31,10 @@
 	<File name="metaclass.hpp" open="1" top="0" tabpos="2">
 		<Cursor position="1235" topLine="24" />
 	</File>
-	<File name="metacontext.hpp" open="0" top="0" tabpos="7">
+	<File name="metacontext.hpp" open="1" top="0" tabpos="7">
 		<Cursor position="133" topLine="0" />
 	</File>
-	<File name="metaobject.cpp" open="1" top="1" tabpos="6">
+	<File name="metaobject.cpp" open="1" top="0" tabpos="6">
 		<Cursor position="352" topLine="0" />
 	</File>
 	<File name="metaobject.hpp" open="1" top="0" tabpos="2">
@@ -48,6 +48,9 @@
 	</File>
 	<File name="stdfnwrap.hpp" open="1" top="0" tabpos="3">
 		<Cursor position="632" topLine="15" />
+	</File>
+	<File name="test.hpp" open="1" top="0" tabpos="0">
+		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="tuple_util.hpp" open="0" top="0" tabpos="4">
 		<Cursor position="2221" topLine="71" />
