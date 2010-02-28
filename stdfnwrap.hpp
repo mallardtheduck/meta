@@ -1,6 +1,7 @@
 #ifndef STDFNWRAP_HPP
 #define STDFNWRAP_HPP
 
+#include "polywrapper.hpp"
 #include "fnwrap.hpp"
 #include "tuple_util.hpp"
 
@@ -17,8 +18,8 @@ class StdFnWrap : public IFnWrap{
         else return false;
     }
 
-    const ITypeInfo& GetReturnType(){
-        return TypeID<Tret>();
+    PolyWrapper<ITypeInfo> GetReturnType(){
+        return TypeID2<Tret>();
     }
     vector<PolyWrapper<ITypeInfo> > GetParamTypes(){
         return TupleTypes<Tparam>();
@@ -44,8 +45,8 @@ class StdFnWrap<Tret, NullType> : public IFnWrap{
         else return false;
     }
 
-    const ITypeInfo& GetReturnType(){
-        return TypeID<Tret>();
+    PolyWrapper<ITypeInfo> GetReturnType(){
+        return TypeID2<Tret>();
     }
     vector<PolyWrapper<ITypeInfo> > GetParamTypes(){
         return vector<PolyWrapper<ITypeInfo> >();

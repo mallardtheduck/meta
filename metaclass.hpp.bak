@@ -23,6 +23,20 @@ class MetaObject;
 class MetaState;
 class Caller;
 
+class MethodInfo{
+    friend class MetaClass;
+    private:
+        MethodInfo(string name, TypeInfo rettype, vector<TypeInfo> paramtypes) :
+        _name(name), _rettype(rettype), _paramtypes(paramtypes) {}
+        string _name;
+        TypeInfo _rettype;
+        vector<TypeInfo> _paramtypes;
+    public:
+        string  GetName();
+        TypeInfo GetReturnType();
+        vector<TypeInfo> GetParamTypes();
+}
+
 class MetaClass{
     friend MetaObject New(const MetaClass &cls);
     string _name;
@@ -43,10 +57,10 @@ class MetaClass{
     }
     string GetName() const;
     virtual Caller operator[](const string &mname);
-    bool HasMethod(string mname);
-    bool IsStatic(string mname);
-    template<typename Tret, typename Tparam> TypeCheck(string mname){
-        return _fn().TypeCheck(typeid(Tret), typeid(Tparam));
+    bool HasMethod(const string &mname) const;
+    bool IsStatic(const string &mname) const;
+    template<typename Tret, typename Tparam> bool TypeCheck(string mname) const{
+        return _methods.find(mname)->second().TypeCheck(TypeID<Tret>(), TypeID<Tparam>());
     }
 };
 

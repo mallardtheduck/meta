@@ -23,6 +23,24 @@ class MetaObject;
 class MetaState;
 class Caller;
 
+class MethodInfo{
+    friend class MetaClass;
+    private:
+        MethodInfo(string name, PolyWrapper<ITypeInfo> rettype, vector<PolyWrapper<ITypeInfo> > paramtypes) :
+        _name(name), _rettype(rettype), _paramtypes(paramtypes) {}
+        string _name;
+        PolyWrapper<ITypeInfo> _rettype;
+        vector<PolyWrapper<ITypeInfo> > _paramtypes;
+    public:
+        string  GetName() const;
+        PolyWrapper<ITypeInfo> GetReturnType() const;
+        vector<PolyWrapper<ITypeInfo> > GetParamTypes() const;
+        PolyWrapper<ITypeInfo> GetParamType(int i) const;
+        Caller MakeCaller(const MetaObject &obj) const;
+        bool operator==(const MethodInfo &rhs) const;
+        bool operator!=(const MethodInfo &rhs) const;
+};
+
 class MetaClass{
     friend MetaObject New(const MetaClass &cls);
     string _name;
@@ -48,6 +66,9 @@ class MetaClass{
     template<typename Tret, typename Tparam> bool TypeCheck(string mname) const{
         return _methods.find(mname)->second().TypeCheck(TypeID<Tret>(), TypeID<Tparam>());
     }
+
+    map<string, MethodInfo> GetMethodInfo() const;
+    MethodInfo GetMethodInfo(const string &method) const;
 };
 
 #endif // METACLASS_HPP

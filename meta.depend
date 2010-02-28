@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1263036997 source:/home/mallard/Projects/meta/metaclass.cpp
+1267354841 source:/home/mallard/Projects/meta/metaclass.cpp
 	"metaclass.hpp"
 	"metaobject.hpp"
 	"exceptions.hpp"
 
-1263910443 /home/mallard/Projects/meta/metaclass.hpp
+1267354523 /home/mallard/Projects/meta/metaclass.hpp
 	<string>
 	<vector>
 	<map>
@@ -24,7 +24,7 @@
 
 1262735561 /home/mallard/Projects/meta/polywrapper.hpp
 
-1263911434 /home/mallard/Projects/meta/fnwrap.hpp
+1267355074 /home/mallard/Projects/meta/fnwrap.hpp
 	<iostream>
 	<typeinfo>
 	<boost/any.hpp>
@@ -34,7 +34,7 @@
 	"metacontext.hpp"
 	"tuple_util.hpp"
 
-1262733096 /home/mallard/Projects/meta/metacontext.hpp
+1267355409 /home/mallard/Projects/meta/metacontext.hpp
 	<string>
 	<map>
 	<boost/any.hpp>
@@ -50,7 +50,7 @@
 	"comp_util.hpp"
 	"util.hpp"
 
-1259752253 /home/mallard/Projects/meta/metaobject.hpp
+1267354744 /home/mallard/Projects/meta/metaobject.hpp
 	<iostream>
 	<string>
 	<stdexcept>
@@ -62,11 +62,11 @@
 	"tuple_util.hpp"
 	"caller.hpp"
 
-1263037011 source:/home/mallard/Projects/meta/metaobject.cpp
+1267354773 source:/home/mallard/Projects/meta/metaobject.cpp
 	"metaobject.hpp"
 	"exceptions.hpp"
 
-1263900536 source:/home/mallard/Projects/meta/main.cpp
+1267292071 source:/home/mallard/Projects/meta/main.cpp
 	"metaclass.hpp"
 	"metaobject.hpp"
 	"new.hpp"
@@ -74,6 +74,7 @@
 	"dbgfnwrap.hpp"
 	"comp_util.hpp"
 	"iface.hpp"
+	"test.hpp"
 	<iostream>
 	"tuple_util.hpp"
 
@@ -81,11 +82,12 @@
 	"metaclass.hpp"
 	"metaobject.hpp"
 
-1263912317 /home/mallard/Projects/meta/stdfnwrap.hpp
+1267355216 /home/mallard/Projects/meta/stdfnwrap.hpp
+	"polywrapper.hpp"
 	"fnwrap.hpp"
 	"tuple_util.hpp"
 
-1263912300 /home/mallard/Projects/meta/dbgfnwrap.hpp
+1267355235 /home/mallard/Projects/meta/dbgfnwrap.hpp
 	<typeinfo>
 	<iostream>
 	<vector>
@@ -123,4 +125,8 @@
 
 1263037438 /home/mallard/Projects/meta/exceptions.hpp
 	<stdexcept>
+
+1267292064 /home/mallard/Projects/meta/test.hpp
+	<string>
+	<iostream>
 

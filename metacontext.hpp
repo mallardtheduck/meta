@@ -21,9 +21,9 @@ class MetaClass;
 
 struct MetaContext{
     string MethodName;
-    MetaClass &Class;
+    const MetaClass &Class;
     PolyWrapper<ITupleManyConvert> ManyArgs;
-    MetaContext(string mname, MetaClass &cls) :
+    MetaContext(string mname, const MetaClass &cls) :
             MethodName(mname),  Class(cls) {}
 };
 

@@ -19,8 +19,8 @@ template <typename Tret, typename Tparam>
     }
 
 
-    const ITypeInfo& GetReturnType(){
-        return TypeID<Tret>();
+    PolyWrapper<ITypeInfo> GetReturnType(){
+        return TypeID2<Tret>();
     }
     vector<PolyWrapper<ITypeInfo> > GetParamTypes(){
         return TupleTypes<Tparam>();
@@ -56,8 +56,8 @@ template <typename Tret>
         return Tret();
     }
 
-    const ITypeInfo& GetReturnType(){
-        return TypeID<Tret>();
+    PolyWrapper<ITypeInfo> GetReturnType(){
+        return TypeID2<Tret>();
     }
     vector<PolyWrapper<ITypeInfo> > GetParamTypes(){
         return vector<PolyWrapper<ITypeInfo> >();

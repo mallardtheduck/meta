@@ -5,6 +5,7 @@
 #include "dbgfnwrap.hpp"
 #include "comp_util.hpp"
 #include "iface.hpp"
+#include "test.hpp"
 
 #include <iostream>
 
@@ -68,14 +69,20 @@ int main(int argc, char** argv)
     MetaIface ifoo;
     ifoo.AddMethod(IfaceMethod<NO_RETURN, NO_PARAMS>("static",true));
     ifoo.AddMethod(IfaceMethod<string, tuple<int, string> >("bar"));
-    bool foomatch=ifoo.IsMatch(foo);
-    cout << "Is 'foo' a match for 'ifoo':" << foomatch << endl;
-    foo["static"]();
+
+    TEST("Interface match", ifoo.IsMatch(foo));
+    bool staticworked=false;
+    try{
+        foo["static"].Call();
+        staticworked=true;
+    }catch(std::exception &e){
+        staticworked=false;
+    }
+    TEST("Static call", staticworked);
     MetaObject objfoo=New(foo);
-    cout << objfoo["bar"].Call<string>(make_tuple(3, string("hi!"))) << endl;
-    objfoo["print"]();
-    objfoo["set"](make_tuple(string("Bye!")));
-    objfoo["print"]();
+    TEST("Construction", ifoo.IsMatch(objfoo));
+    TEST_R("Call with parameters/return",
+        objfoo["bar"].Call<string>(make_tuple(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
 
     MetaClass dbgClass("DebugClass");
     dbgClass.AddMethod("ctor", DbgFnWrap<NO_RETURN, NO_PARAMS>());

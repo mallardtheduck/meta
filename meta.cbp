@@ -50,6 +50,7 @@
 		<Unit filename="new.hpp" />
 		<Unit filename="polywrapper.hpp" />
 		<Unit filename="stdfnwrap.hpp" />
+		<Unit filename="test.hpp" />
 		<Unit filename="trace.hpp" />
 		<Unit filename="tuple_test.hpp" />
 		<Unit filename="tuple_util.hpp" />

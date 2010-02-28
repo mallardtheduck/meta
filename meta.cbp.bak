@@ -36,6 +36,7 @@
 		<Unit filename="caller.hpp" />
 		<Unit filename="comp_util.hpp" />
 		<Unit filename="dbgfnwrap.hpp" />
+		<Unit filename="exceptions.hpp" />
 		<Unit filename="fnwrap.hpp" />
 		<Unit filename="iface.hpp" />
 		<Unit filename="list.hpp" />

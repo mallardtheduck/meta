@@ -36,7 +36,7 @@ class MetaObject : public MetaClass{
 
     public:
     MetaObject(const MetaObject &o): MetaClass(o.GetName()), _state(o._state) {}
-    Caller operator[](const string &mname);
+    Caller operator[](const string &mname) const;
     MetaObject Copy();
 
     template<typename Tparam> void CallCtor(Tparam param){

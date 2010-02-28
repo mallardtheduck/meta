@@ -12,7 +12,7 @@ MetaObject MetaObject::Copy(){
     return mo;
 }
 
-Caller MetaObject::operator[](const string &mname){
+Caller MetaObject::operator[](const string &mname) const{
     if(_methods.find(mname)==_methods.end()) throw Exceptions::NoSuchMethod();
-    return Caller(mname, _methods[mname], MetaContext(mname, *this), *_state);
+    return Caller(mname, _methods.find(mname)->second, MetaContext(mname, *this), *_state);
 }

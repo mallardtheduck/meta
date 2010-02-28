@@ -27,7 +27,7 @@ class IFnWrap{
     virtual any Call(MetaInfo &info, any args)=0;
     virtual any Call(MetaInfo &info, many args)=0;
 
-    virtual const ITypeInfo& GetReturnType()=0;
+    virtual PolyWrapper<ITypeInfo> GetReturnType()=0;
     virtual vector<PolyWrapper<ITypeInfo> > GetParamTypes()=0;
 
     virtual bool IsStatic(){return _static;}

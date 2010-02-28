@@ -23,15 +23,15 @@ class IFnWrap{
     bool _static;
     public:
     IFnWrap() : _static(false) {}
-    virtual bool TypeCheck(const type_info &retType, const type_info &paramType)=0;
+    virtual bool TypeCheck(const ITypeInfo &retType, const ITypeInfo &paramType)=0;
     virtual any Call(MetaInfo &info, any args)=0;
     virtual any Call(MetaInfo &info, many args)=0;
-    virtual bool IsStatic(){
-        return _static;
-    }
-    virtual void SetStatic(bool s){
-        _static=s;
-    }
+
+    virtual const ITypeInfo& GetReturnType()=0;
+    virtual vector<PolyWrapper<ITypeInfo> > GetParamTypes()=0;
+
+    virtual bool IsStatic(){return _static;}
+    virtual void SetStatic(bool s){_static=s;}
     virtual ~IFnWrap(){}
 };
 
