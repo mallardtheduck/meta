@@ -1,73 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
+	<ActiveTarget name="Debug Library" />
 	<File name="caller.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="784" topLine="20" />
 	</File>
-	<File name="caller.hpp" open="0" top="0" tabpos="4">
-		<Cursor position="2297" topLine="59" />
+	<File name="caller.hpp" open="0" top="0" tabpos="6">
+		<Cursor position="5244" topLine="138" />
 	</File>
 	<File name="comp_util.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="340" topLine="2" />
+		<Cursor position="340" topLine="0" />
 	</File>
-	<File name="dbgfnwrap.hpp" open="0" top="0" tabpos="2">
-		<Cursor position="766" topLine="45" />
+	<File name="dbgfnwrap.hpp" open="0" top="0" tabpos="4">
+		<Cursor position="2651" topLine="69" />
 	</File>
 	<File name="exceptions.hpp" open="0" top="0" tabpos="12">
-		<Cursor position="111" topLine="0" />
+		<Cursor position="414" topLine="0" />
 	</File>
-	<File name="fnwrap.hpp" open="0" top="0" tabpos="5">
-		<Cursor position="865" topLine="22" />
+	<File name="fnwrap.hpp" open="1" top="0" tabpos="2">
+		<Cursor position="1366" topLine="40" />
 	</File>
 	<File name="iface.hpp" open="0" top="0" tabpos="3">
-		<Cursor position="1216" topLine="30" />
-	</File>
-	<File name="list.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="90" topLine="0" />
+		<Cursor position="2577" topLine="49" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="230" topLine="9" />
+		<Cursor position="2525" topLine="72" />
 	</File>
 	<File name="meta.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="196" topLine="0" />
 	</File>
-	<File name="metaclass.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="2199" topLine="65" />
+	<File name="metaclass.cpp" open="0" top="0" tabpos="11">
+		<Cursor position="357" topLine="3" />
 	</File>
-	<File name="metaclass.hpp" open="0" top="0" tabpos="2">
-		<Cursor position="2115" topLine="57" />
+	<File name="metaclass.hpp" open="1" top="1" tabpos="8">
+		<Cursor position="4979" topLine="107" />
 	</File>
-	<File name="metacontext.hpp" open="0" top="0" tabpos="7">
-		<Cursor position="296" topLine="5" />
+	<File name="metacontext.hpp" open="1" top="0" tabpos="5">
+		<Cursor position="1426" topLine="23" />
 	</File>
-	<File name="metaobject.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="549" topLine="5" />
+	<File name="metaobject.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="156" topLine="0" />
 	</File>
-	<File name="metaobject.hpp" open="0" top="0" tabpos="2">
-		<Cursor position="342" topLine="36" />
+	<File name="metaobject.hpp" open="0" top="0" tabpos="3">
+		<Cursor position="1758" topLine="50" />
 	</File>
-	<File name="metastate.hpp" open="0" top="0" tabpos="8">
-		<Cursor position="223" topLine="0" />
+	<File name="metastate.hpp" open="1" top="0" tabpos="6">
+		<Cursor position="263" topLine="0" />
 	</File>
-	<File name="new.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="284" topLine="0" />
+	<File name="new.hpp" open="0" top="0" tabpos="15">
+		<Cursor position="420" topLine="0" />
 	</File>
-	<File name="polywrapper.hpp" open="0" top="0" tabpos="5">
-		<Cursor position="47" topLine="0" />
+	<File name="polywrapper.hpp" open="0" top="0" tabpos="9">
+		<Cursor position="2341" topLine="85" />
 	</File>
-	<File name="stdfnwrap.hpp" open="0" top="0" tabpos="3">
-		<Cursor position="1874" topLine="66" />
+	<File name="stdfnwrap.hpp" open="1" top="0" tabpos="1">
+		<Cursor position="4383" topLine="119" />
 	</File>
 	<File name="test.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="10" />
 	</File>
-	<File name="trace.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="0" topLine="12" />
+	<File name="trace.hpp" open="1" top="0" tabpos="3">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="tuple_util.hpp" open="0" top="0" tabpos="4">
-		<Cursor position="275" topLine="60" />
+	<File name="tuple_util.hpp" open="1" top="0" tabpos="4">
+		<Cursor position="3935" topLine="145" />
 	</File>
-	<File name="util.hpp" open="0" top="0" tabpos="6">
-		<Cursor position="200" topLine="0" />
+	<File name="util.hpp" open="1" top="0" tabpos="7">
+		<Cursor position="444" topLine="24" />
 	</File>
 </CodeBlocks_layout_file>

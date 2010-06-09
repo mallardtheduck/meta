@@ -23,19 +23,37 @@ namespace meta
     class MetaObject;
     class MetaClass;
 
+    //! A Meta method execution context
+    /*!
+        A struct holding context information for meta method execution
+    */
     struct MetaContext
     {
-        string MethodName;
-        const MetaClass &Class;
-        PolyWrapper<ITupleManyConvert> ManyArgs;
+        string MethodName;                                  //!< The method name
+        const MetaClass &Class;                             //!< The class
+        PolyWrapper<ITupleManyConvert> ManyArgs;            //!< A function to retrieve the arguements as a vector<any>
+        /*!
+            Constructor
+            \param mname    The method name
+            \param cls      The class
+        */
         MetaContext(string mname, const MetaClass &cls) :
                 MethodName(mname),  Class(cls) {}
     };
 
+    //! Meta call information
+    /*!
+        A stuct containing information for a Meta call
+    */
     struct MetaInfo
     {
-        MetaState &State;
-        MetaContext Context;
+        MetaState &State;                                   //!< The object state
+        MetaContext Context;                                //!< The execution context
+        /*!
+            Constructor
+            \param state    The object state
+            \param context  The execution context
+        */
         MetaInfo(MetaState &state, MetaContext context):State(state), Context(context){}
     };
 

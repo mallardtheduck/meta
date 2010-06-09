@@ -12,6 +12,13 @@ namespace meta
         return mo;
     }
 
+    MetaObject *NewPtr(const MetaClass &cls)
+    {
+        MetaObject *mo=new MetaObject(cls);
+        mo->CallCtor();
+        return mo;
+    }
+
     string MetaClass::GetName() const
     {
         return _name;

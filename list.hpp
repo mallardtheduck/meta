@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 
+#error unused
+
 using namespace std;
 
 template<typename T> class vList

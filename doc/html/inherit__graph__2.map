@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$class_i_tuple_many_convert.html" title="Interface for a tuple&#45;to&#45;many conversion object." alt="" coords="5,32,139,61"/>
+<area shape="rect" href="$class_tuple_many_convert.html" title="Template implementation of a tuple&#45;to&#45;many conversion object." alt="" coords="200,5,360,35"/>
+<area shape="rect" href="$class_tuple_many_convert_3_01many_01_4.html" title="An ITupleManyConvert that returns a stored many." alt="" coords="188,59,372,88"/>
+</map>

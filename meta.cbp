@@ -54,7 +54,6 @@
 		<Unit filename="exceptions.hpp" />
 		<Unit filename="fnwrap.hpp" />
 		<Unit filename="iface.hpp" />
-		<Unit filename="list.hpp" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />

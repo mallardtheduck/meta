@@ -15,6 +15,12 @@ META_METHOD(foo_ctor, NO_RETURN, NO_PARAMS)
     return Nothing;
 }
 
+META_METHOD(foo_dtor, NO_RETURN, NO_PARAMS)
+{
+    cout << "foo destroyed." << endl;
+    return Nothing;
+}
+
 META_METHOD(foo_bar, string, Q(tuple<int, string>))
 {
     MEM(string, bla);
@@ -56,6 +62,7 @@ int main(int argc, char** argv)
     meta::MetaClass foo("Foo");
     foo.AddStatic("static", meta::StdFn(foo_static));
     foo.AddMethod("ctor", meta::StdFn(foo_ctor));
+    foo.AddMethod("dtor", meta::StdFn(foo_dtor));
     foo.AddMethod("bar", meta::StdFn(foo_bar));
     foo.AddMethod("set", meta::StdFn(foo_set));
     foo.AddMethod("print", meta::StdFn(foo_print));
@@ -82,25 +89,11 @@ int main(int argc, char** argv)
 
     meta::MethodInfo barinfo=objfoo.GetMethodInfo("bar");
     TEST("Reflectivity",barinfo==foo.GetMethodInfo("bar"));
-    TEST_R("Reflection return type", barinfo.GetReturnType()().Name(), TypeID<string>().Name());
-    TEST_R("Reflection param types", barinfo.GetParamType(0)().Name(), TypeID<int>().Name());
+    TEST_R("Reflection return type", barinfo.GetReturnType()->Name(), TypeID<string>().Name());
+    TEST_R("Reflection param types", barinfo.GetParamType(0)->Name(), TypeID<int>().Name());
     TEST_R("Call from reflection",
            barinfo.MakeCaller(objfoo).Call<string>(make_tuple(3, string("ho!"))),
            string("Hello world!ho!ho!ho!"));
-
-    /*    MetaClass dbgClass("DebugClass");
-        dbgClass.AddMethod("ctor", DbgFnWrap<NO_RETURN, NO_PARAMS>());
-        dbgClass.AddMethod("DoSomething", DbgFnWrap<int, tuple<int, int> >());
-        MetaObject dbgObj=New(dbgClass);
-        dbgObj["DoSomething"].Call<int>(make_tuple(1,2));
-
-        out_tuple(make_tuple(3.76, "Hello world!", string("HAHA")));
-
-        many m=tuple_to_many(make_tuple(4.5,(short)3,900000000,string("Hiya!"),'c', 0xfeedbabe, false, Nothing));
-        for (size_t i=0; i<m.size(); i++)
-        {
-            cout << demangle(m[i].type().name()) << endl;
-        }*/
 
     string garb;
     getline(cin, garb);

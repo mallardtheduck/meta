@@ -10,9 +10,10 @@ using namespace boost;
 namespace meta
 {
 
+    //! The state of an object
     struct MetaState
     {
-        map<string, any> Members;
+        map<string, any> Members; //!< A mapping of object member variables
     };
 
 }

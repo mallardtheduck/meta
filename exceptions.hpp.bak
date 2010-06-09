@@ -5,7 +5,13 @@
 
 using namespace std;
 
-namespace Exceptions{
+namespace meta
+{
+    namespace Exceptions
+    {
+        class TypeMismatch : public std::exception {};
+        class NoSuchMethod : public std::exception {};
+        class InstanceRequired : public std::exception {};
+    }
 }
-
 #endif // EXCEPTIONS_HPP_INCLUDED

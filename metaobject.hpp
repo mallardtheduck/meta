@@ -25,9 +25,14 @@ namespace meta
 
     class MetaClass;
 
+    //! A Meta object
+    /*!
+        An instance of a Meta object. A collection of methods, plus state
+    */
     class MetaObject : public MetaClass
     {
         friend MetaObject New(const MetaClass &cls);
+        friend MetaObject* NewPtr(const MetaClass &cls);
 
     private:
         shared_ptr<MetaState> _state;
@@ -40,14 +45,35 @@ namespace meta
         void CallCtor();
 
     public:
-        MetaObject(const MetaObject &o): MetaClass(o.GetName()), _state(o._state) {}
+        /*!
+            Default constructor, creates an empty object
+        */
+        MetaObject() : MetaClass("EMPTY_OBJECT") {}
+        /*!
+            Copy constructor
+            \param o The object to copy
+        */
+        MetaObject(const MetaObject &o);
+        /*!
+            Destructor
+        */
+        ~MetaObject();
+        /*!
+            Indexing operator
+            \param mname    The name of a method
+            \return A Caller for the method
+        */
         Caller operator[](const string &mname) const;
-        MetaObject Copy();
-
-        template<typename Tparam> void CallCtor(Tparam param)
-        {
-            if (_methods.count("ctor")==1) operator[]("ctor").Call<void>(param);
-        }
+        /*!
+            Copy the object
+            \return A copy of this object
+        */
+        MetaObject Copy() const;
+        /*!
+            Get the object state
+            \return the object state
+        */
+        MetaState& GetState() const;
     };
 }
 #endif // METAOBJECT_HPP
