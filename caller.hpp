@@ -98,7 +98,7 @@ namespace meta
         */
         template<typename Tparam> void Call(Tparam arg) const
         {
-            operator()<Tparam>(arg);
+            operator()/*<Tparam>*/(arg);
         }
         /*!
             Call operator with no arguements
