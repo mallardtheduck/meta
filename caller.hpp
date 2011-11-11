@@ -161,19 +161,8 @@ namespace meta
         */
         
 //#if !defined(BOOST_NO_VARIADIC_TEMPLATES)
-        
-        template<typename H> void dbg_v(H h){
-            std::cout << typeid(h).name() << std::endl;
-        }
-        
-        template<typename H, typename... T> void dbg_v(H h, T... t){
-            std::cout << typeid(h).name() << std::endl;
-            dbg_v(t...);
-        }
-        
+                
         template<typename Tret, typename... Tparams> Tret Call_Variadic(Tparams... params){
-            std::cout << "SIZE:" << sizeof...(Tparams) << std::endl;
-            dbg_v(params...);
             return Call_Many<Tret>(variadic_to_many(params...));
         }
         

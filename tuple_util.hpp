@@ -16,7 +16,7 @@ typedef std::vector<boost::any> many;
 #if !defined(BOOST_NO_VARIADIC_TEMPLATES)
 
 template<typename H> void variadic_to_many(many &m, H head){
-    m.push_back(head);
+    m.push_back(boost::any(head));
 }
 
 template<typename H, typename... T> void variadic_to_many(many &m, H head, T... tail){
@@ -27,15 +27,16 @@ template<typename H, typename... T> void variadic_to_many(many &m, H head, T... 
 template<typename... V> many variadic_to_many(V... vars){
     many m;
     variadic_to_many(m, vars...);
+    return m;
 }
 
-/* Not yet supported by GCC (4.6)
+/* Not yet supported by GCC (as of 4.6)
  * 
  * template<typename... A> boost::tuple<A...> MArgs(A... args){
     return boost::tuples::make_tuple(args...);
 }*/
 
-#define MArgs(...) /*tuple_to_many(*/boost::make_tuple(__VA_ARGS__)/*)*/
+#define MArgs(...) __VA_ARGS__
 
 #else
 
