@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "config.hpp"
+
 using namespace std;
 using namespace boost;
 
@@ -59,6 +61,7 @@ template<typename T> void out_tuple(T tup)
 
 int main(int argc, char** argv)
 {
+    cout << __cplusplus << endl;
     meta::MetaClass foo("Foo");
     foo.AddStatic("static", meta::StdFn(foo_static));
     foo.AddMethod("ctor", meta::StdFn(foo_ctor));
@@ -85,17 +88,20 @@ int main(int argc, char** argv)
     meta::MetaObject objfoo=meta::New(foo);
     TEST("Construction", ifoo.IsMatch(objfoo));
     TEST_R("Call with parameters/return",
-           objfoo["bar"].Call<string>(make_tuple(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
+           objfoo["bar"].Call<string>(MArgs(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
 
     meta::MethodInfo barinfo=objfoo.GetMethodInfo("bar");
     TEST("Reflectivity",barinfo==foo.GetMethodInfo("bar"));
     TEST_R("Reflection return type", barinfo.GetReturnType()->Name(), TypeID<string>().Name());
     TEST_R("Reflection param types", barinfo.GetParamType(0)->Name(), TypeID<int>().Name());
     TEST_R("Call from reflection",
-           barinfo.MakeCaller(objfoo).Call<string>(make_tuple(3, string("ho!"))),
+           barinfo.MakeCaller(objfoo).Call<string>(MArgs(3, string("ho!"))),
            string("Hello world!ho!ho!ho!"));
+#if !defined(BOOST_NO_VARIADIC_TEMPLATES)
+    TEST_R("Call by variadic template", objfoo["bar"].Call<string>(3, string("hi!")), string("Hello world!hi!hi!hi!"));
+#endif
 
-    string garb;
-    getline(cin, garb);
+    /*string garb;
+    getline(cin, garb);*/
     return 0;
 }

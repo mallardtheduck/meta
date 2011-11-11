@@ -9,8 +9,6 @@
 
 #include <string>
 
-using namespace std;
-
 #ifdef HAVE_CXA_DEMANGLE
 
 #include <cxxabi.h>
@@ -20,7 +18,7 @@ using namespace std;
     \param name the name recieved from typeid::name() in GCC
     \return the C++ type name
 */
-inline string demangle(const char* name)
+inline std::string demangle(const char* name)
 {
     //A 1024-chracter buffer should be large enough, this is only a debugging tool
     char buf[1024];
@@ -31,7 +29,7 @@ inline string demangle(const char* name)
     char* res = abi::__cxa_demangle(name, buf, &size, &status);
 
     //Return the result as a std::string
-    return string(res);
+    return std::string(res);
 }
 #else
 

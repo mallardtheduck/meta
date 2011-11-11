@@ -12,10 +12,6 @@
 
 #include "tuple_util.hpp"
 
-using namespace boost;
-using namespace std;
-using namespace tuples;
-
 namespace meta
 {
 
@@ -48,14 +44,14 @@ namespace meta
             \param args     The method arguements as a tuple wrapped in an any
             \return The method return value wrapped in an any
         */
-        virtual any Call(MetaInfo &info, any args)=0;
+        virtual boost::any Call(MetaInfo &info, boost::any args)=0;
         /*!
             Call the method with vector<any> arguements
             \param info     The call information
             \param args     The method arguements as a vector<any>
             \return The method return value wrapped in any any
         */
-        virtual any Call(MetaInfo &info, many args)=0;
+        virtual boost::any Call(MetaInfo &info, many args)=0;
 
         /*!
             Get the method return type
@@ -66,7 +62,7 @@ namespace meta
             Get the method parameter types
             \return The method parameter types
         */
-        virtual vector<PolyWrapper<ITypeInfo> > GetParamTypes()=0;
+        virtual std::vector<PolyWrapper<ITypeInfo> > GetParamTypes()=0;
 
         /*!
             Is the method static? (implemented in interface)

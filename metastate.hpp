@@ -4,16 +4,13 @@
 #include <map>
 #include <boost/any.hpp>
 
-using namespace std;
-using namespace boost;
-
 namespace meta
 {
 
     //! The state of an object
     struct MetaState
     {
-        map<string, any> Members; //!< A mapping of object member variables
+        std::map<std::string, boost::any> Members; //!< A mapping of object member variables
     };
 
 }

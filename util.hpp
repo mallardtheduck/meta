@@ -10,11 +10,10 @@
 
 #include <typeinfo>
 #include <boost/foreach.hpp>
+
 #define foreach BOOST_FOREACH
 #include "comp_util.hpp"
 #include "polywrapper.hpp"
-
-using namespace std;
 
 struct NullType
 {
@@ -35,8 +34,8 @@ public:
     virtual bool operator==(const ITypeInfo &rhs) const=0;
     virtual bool operator!=(const ITypeInfo &rhs) const=0;
     virtual bool before(const ITypeInfo &rhs) const=0;
-    virtual string Name() const=0;
-    virtual const type_info& Info() const=0;
+    virtual std::string Name() const=0;
+    virtual const std::type_info& Info() const=0;
 };
 
 template<typename T> class TypeInfo : public ITypeInfo
@@ -54,11 +53,11 @@ public:
     {
         return typeid(T).before(rhs.Info());
     }
-    string Name() const
+    std::string Name() const
     {
         return demangle(typeid(T).name());
     }
-    const type_info& Info() const
+    const std::type_info& Info() const
     {
         return typeid(T);
     }

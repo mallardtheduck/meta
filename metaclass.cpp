@@ -19,45 +19,45 @@ namespace meta
         return mo;
     }
 
-    string MetaClass::GetName() const
+    std::string MetaClass::GetName() const
     {
         return _name;
     }
 
-    Caller MetaClass::operator[](const string &mname)
+    Caller MetaClass::operator[](const std::string &mname)
     {
         if (_methods.find(mname)==_methods.end()) throw Exceptions::NoSuchMethod();
         if (!_methods[mname]().IsStatic()) throw Exceptions::InstanceRequired();
         return Caller(mname, _methods[mname], MetaContext(mname, *this), _staticstate);
     }
 
-    bool MetaClass::HasMethod(const string &mname) const
+    bool MetaClass::HasMethod(const std::string &mname) const
     {
         return !(_methods.find(mname)==_methods.end());
     }
 
-    bool MetaClass::IsStatic(const string &mname) const
+    bool MetaClass::IsStatic(const std::string &mname) const
     {
         return _methods.find(mname)->second().IsStatic();
     }
 
-    map<string, MethodInfo> MetaClass::GetMethodInfo() const
+    std::map<std::string, MethodInfo> MetaClass::GetMethodInfo() const
     {
-        map<string, MethodInfo> ret;
-        foreach(Q(pair<string, PolyWrapper<IFnWrap> >) meth, _methods)
+        std::map<std::string, MethodInfo> ret;
+        foreach(Q(std::pair<std::string, PolyWrapper<IFnWrap> >) meth, _methods)
         {
-            ret.insert(make_pair(meth.first, MethodInfo(meth.first, meth.second().GetReturnType(), meth.second().GetParamTypes())));
+            ret.insert(std::make_pair(meth.first, MethodInfo(meth.first, meth.second().GetReturnType(), meth.second().GetParamTypes())));
         }
         return ret;
     }
 
-    MethodInfo MetaClass::GetMethodInfo(const string &method) const
+    MethodInfo MetaClass::GetMethodInfo(const std::string &method) const
     {
         PolyWrapper<IFnWrap> fn=_methods.find(method)->second;
         return MethodInfo(method, fn().GetReturnType(), fn().GetParamTypes());
     }
 
-    string MethodInfo::GetName() const
+    std::string MethodInfo::GetName() const
     {
         return _name;
     }
@@ -67,7 +67,7 @@ namespace meta
         return _rettype;
     }
 
-    vector<PolyWrapper<ITypeInfo> > MethodInfo::GetParamTypes() const
+    std::vector<PolyWrapper<ITypeInfo> > MethodInfo::GetParamTypes() const
     {
         return _paramtypes;
     }

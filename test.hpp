@@ -3,24 +3,23 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
 
 #define TEST(d, t) Test(__FILE__, __LINE__, d, t)
 #define TEST_R(d, t, r) TestR(__FILE__, __LINE__, d, t, r);
 
-inline void Test(string file, int line, string desc, bool test)
+inline void Test(std::string file, int line, std::string desc, bool test)
 {
-    cout << "Test: '" << desc << "' Result: "<< (test?"Pass":"FAIL") << endl;
-    if (!test) cout << "*** FAILED TEST AT: " << file << ":" << line << endl;
+    std::cout << "Test: '" << desc << "' Result: "<< (test?"Pass":"FAIL") << std::endl;
+    if (!test) std::cout << "*** FAILED TEST AT: " << file << ":" << line << std::endl;
 }
 
-template<typename T> void TestR(string file, int line, string desc, T test, T expresult)
+template<typename T> void TestR(std::string file, int line, std::string desc, T test, T expresult)
 {
-    cout << "Test: '" << desc << "' Result: "<< (test==expresult?"Pass":"FAIL") << endl;
+    std::cout << "Test: '" << desc << "' Result: "<< (test==expresult?"Pass":"FAIL") << std::endl;
     if (test!=expresult)
     {
-        cout << "*** FAILED TEST AT: " << file << ":" << line << endl;
-        cout << "*** Expected: '" << expresult << "' Got: '" << test << "'" << endl;
+        std::cout << "*** FAILED TEST AT: " << file << ":" << line << std::endl;
+        std::cout << "*** Expected: '" << expresult << "' Got: '" << test << "'" << std::endl;
     }
 }
 

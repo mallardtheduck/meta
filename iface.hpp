@@ -3,12 +3,11 @@
 
 #include <string>
 #include <vector>
+
 #include "metaclass.hpp"
 #include "caller.hpp"
 #include "polywrapper.hpp"
 #include "util.hpp"
-
-using namespace std;
 
 namespace meta
 {
@@ -38,20 +37,20 @@ namespace meta
     template<typename Tret, typename Tparam> class IfaceMethod : public IIfaceMethod
     {
     private:
-        string _name;
+        std::string _name;
         bool _static;
     public:
         /*!
             Constructor
             \param name     The method name
         */
-        IfaceMethod(const string &name) : _name(name), _static(false) {}
+        IfaceMethod(const std::string &name) : _name(name), _static(false) {}
         /*!
             Constructor
             \param name     The method name
             \param stic     true if the method is static, false otherwise
         */
-        IfaceMethod(const string &name, bool stic) : _name(name), _static(stic) {}
+        IfaceMethod(const std::string &name, bool stic) : _name(name), _static(stic) {}
 
         /*!
             Test whether a class has a method matching this one
@@ -71,7 +70,7 @@ namespace meta
     class MetaIface
     {
     private:
-        vector<PolyWrapper<IIfaceMethod> > _methods;
+        std::vector<PolyWrapper<IIfaceMethod> > _methods;
     public:
         /*!
             Add a method specifacation to this interface

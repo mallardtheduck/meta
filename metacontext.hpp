@@ -14,9 +14,6 @@
 #define MEM_INIT_VAL(t,x,v) info.State.Members[#x]=t(v); MEM(t,x)
 #define MEM(t,x) t &x=any_cast<t&>(info.State.Members[#x])
 
-using namespace std;
-using namespace boost;
-
 namespace meta
 {
 
@@ -29,7 +26,7 @@ namespace meta
     */
     struct MetaContext
     {
-        string MethodName;                                  //!< The method name
+        std::string MethodName;                                  //!< The method name
         const MetaClass &Class;                             //!< The class
         PolyWrapper<ITupleManyConvert> ManyArgs;            //!< A function to retrieve the arguements as a vector<any>
         /*!
@@ -37,7 +34,7 @@ namespace meta
             \param mname    The method name
             \param cls      The class
         */
-        MetaContext(string mname, const MetaClass &cls) :
+        MetaContext(std::string mname, const MetaClass &cls) :
                 MethodName(mname),  Class(cls) {}
     };
 

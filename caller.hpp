@@ -9,8 +9,6 @@
 #include "tuple_util.hpp"
 #include "exceptions.hpp"
 
-using namespace std;
-
 namespace meta
 {
 //! Method caller
@@ -20,10 +18,10 @@ namespace meta
     class Caller
     {
     private:
-        string _mname;
+        std::string _mname;
         PolyWrapper<IFnWrap> _fn;
         mutable MetaContext _context;
-        mutable MetaState &_state;
+        MetaState &_state;
     public:
         /*!
             Constructor
@@ -32,15 +30,27 @@ namespace meta
             \param context  Method execution context
             \param state    Object state
         */
-        Caller(const string &mname, PolyWrapper<IFnWrap> fn, MetaContext context, MetaState &state) :
+        Caller(const std::string &mname, PolyWrapper<IFnWrap> fn, MetaContext context, MetaState &state) :
                 _mname(mname), _fn(fn), _context(context), _state(state) {}
+
+#if !defined(BOOST_NO_VARIADIC_TEMPLATES)
+
+        template<typename Tret, typename... Tparams> Tret operator()(Tparams... params){
+            return operator()<Tret>(variadic_to_many(params...));
+        }
+
+        template<typename Tret, typename... Tparams> Tret Call(Tparams... params){
+            return operator()<Tret>(params...);
+        }
+
+#endif
 
         /*!
             Call operator for tuple
             \param arg  A tuple containing the method arguments
             \return     The method return value
         */
-        template<typename Tret, typename Tparam> Tret operator()(Tparam arg) const
+        template<typename Tret, typename Tparam> Tret operator()(Tparam &arg) const
         {
             if (!_fn().TypeCheck(TypeID<Tret>(),TypeID<Tparam>()))
             {
@@ -50,17 +60,17 @@ namespace meta
             MetaInfo ifo(_state, _context);
             if (TypeID<Tret>()==TypeID<NO_RETURN>())
             {
-                _fn().Call(ifo, any(arg));
+                _fn().Call(ifo, boost::any(arg));
                 return Nothing;
             }
-            else return any_cast<Tret>(_fn().Call(ifo, any(arg)));
+            else return boost::any_cast<Tret>(_fn().Call(ifo, boost::any(arg)));
         }
         /*!
             Call method for tuple
             \param arg  A tuple containing the method arguements
             \return     The method return value
         */
-        template<typename Tret, typename Tparam> Tret Call(Tparam arg) const
+        template<typename Tret, typename Tparam> Tret Call(Tparam& arg) const
         {
             return operator()<Tret>(arg);
         }
@@ -73,7 +83,7 @@ namespace meta
         {
             _context.ManyArgs=MkConvert(args);
             MetaInfo ifo(_state, _context);
-            return any_cast<Tret>(_fn().Call(ifo, args));
+            return boost::any_cast<Tret>(_fn().Call(ifo, args));
         }
         /*!
             Call method for vector<any> (many).
@@ -131,13 +141,13 @@ namespace meta
             \param args     The method arguements as a vector<any>
             \return         The method return value as an any
         */
-        any operator()(many args) const;
+        boost::any operator()(many args) const;
         /*!
             Call method vector<any> with any return
             \param args     The method arguements as a vector<any>
             \return         The method return value as an any
         */
-        any Call(many args) const;
+        boost::any Call(many args) const;
         /*!
             Call operator with no arguements or return
         */
@@ -150,7 +160,7 @@ namespace meta
             Get the method name
             \return     The method name
         */
-        string GetName() const;
+        std::string GetName() const;
         /*!
             Get the method return type
             \return     The method return type
@@ -160,7 +170,7 @@ namespace meta
             Get the method parameter types
             \return     The method parameter types
         */
-        vector<PolyWrapper<ITypeInfo> > GetParamTypes() const;
+        std::vector<PolyWrapper<ITypeInfo> > GetParamTypes() const;
 
     };
 

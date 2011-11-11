@@ -5,7 +5,6 @@
 #include "fnwrap.hpp"
 #include "tuple_util.hpp"
 
-using namespace std;
 namespace meta
 {
 
@@ -49,7 +48,7 @@ namespace meta
             Get the method parameter types
             \return The method parameter types
         */
-        vector<PolyWrapper<ITypeInfo> > GetParamTypes()
+        std::vector<PolyWrapper<ITypeInfo> > GetParamTypes()
         {
             return TupleTypes<Tparam>();
         }
@@ -60,9 +59,9 @@ namespace meta
             \param args     The method arguements as a tuple wrapped in an any
             \return The method return value wrapped in an any
         */
-        any Call(MetaInfo &info, any args)
+        boost::any Call(MetaInfo &info, boost::any args)
         {
-            return _fnptr(info, any_cast<Tparam>(args));
+            return _fnptr(info, boost::any_cast<Tparam>(args));
         }
         /*!
             Call the method with vector<any> arguements
@@ -70,7 +69,7 @@ namespace meta
             \param args     The method arguements as a vector<any>
             \return The method return value wrapped in any any
         */
-        any Call(MetaInfo &info, many args)
+        boost::any Call(MetaInfo &info, many args)
         {
             return Call(info, many_to_tuple<Tparam>(args));
         }
@@ -110,9 +109,9 @@ namespace meta
             Get the method parameter types
             \return The method parameter types
         */
-        vector<PolyWrapper<ITypeInfo> > GetParamTypes()
+        std::vector<PolyWrapper<ITypeInfo> > GetParamTypes()
         {
-            return vector<PolyWrapper<ITypeInfo> >();
+            return std::vector<PolyWrapper<ITypeInfo> >();
         }
 
         /*!
@@ -121,9 +120,9 @@ namespace meta
             \param args     The method arguements as a tuple wrapped in an any
             \return The method return value wrapped in an any
         */
-        any Call(MetaInfo &info, any args)
+        boost::any Call(MetaInfo &info, boost::any args)
         {
-            return _fnptr(info, any_cast<Tparam>(args));
+            return _fnptr(info, boost::any_cast<Tparam>(args));
         }
         /*!
             Call the method with vector<any> arguements
@@ -131,9 +130,9 @@ namespace meta
             \param args     The method arguements as a vector<any>
             \return The method return value wrapped in any any
         */
-        any Call(MetaInfo &info, many args)
+        boost::any Call(MetaInfo &info, many args)
         {
-            return Call(info, any(NullValue));
+            return Call(info, boost::any(NullValue));
         }
     };
 

@@ -14,9 +14,6 @@
 #include "tuple_util.hpp"
 #include "caller.hpp"
 
-using namespace std;
-using namespace boost;
-
 namespace meta
 {
 
@@ -35,7 +32,7 @@ namespace meta
         friend MetaObject* NewPtr(const MetaClass &cls);
 
     private:
-        shared_ptr<MetaState> _state;
+        boost::shared_ptr<MetaState> _state;
 
         MetaObject(const MetaClass &cls): MetaClass(cls.GetName())
         {
@@ -63,7 +60,7 @@ namespace meta
             \param mname    The name of a method
             \return A Caller for the method
         */
-        Caller operator[](const string &mname) const;
+        Caller operator[](const std::string &mname) const;
         /*!
             Copy the object
             \return A copy of this object

@@ -14,9 +14,6 @@
 #include "metacontext.hpp"
 #include "caller.hpp"
 
-using namespace std;
-using namespace boost;
-
 namespace meta
 {
 
@@ -34,11 +31,11 @@ namespace meta
     {
         friend class MetaClass;
     private:
-        MethodInfo(string name, PolyWrapper<ITypeInfo> rettype, vector<PolyWrapper<ITypeInfo> > paramtypes) :
+        MethodInfo(std::string name, PolyWrapper<ITypeInfo> rettype, std::vector<PolyWrapper<ITypeInfo> > paramtypes) :
                 _name(name), _rettype(rettype), _paramtypes(paramtypes) {}
-        string _name;
+        std::string _name;
         PolyWrapper<ITypeInfo> _rettype;
-        vector<PolyWrapper<ITypeInfo> > _paramtypes;
+        std::vector<PolyWrapper<ITypeInfo> > _paramtypes;
     public:
         /*!
             Constructor
@@ -48,7 +45,7 @@ namespace meta
             Get the method name
             \return The method name
         */
-        string GetName() const;
+        std::string GetName() const;
         /*!
             Get the method return type
             \return The method return type
@@ -58,7 +55,7 @@ namespace meta
             Get the method parameter types
             \return The method paramter types (tuple)
         */
-        vector<PolyWrapper<ITypeInfo> > GetParamTypes() const;
+        std::vector<PolyWrapper<ITypeInfo> > GetParamTypes() const;
         /*!
             Get a specific parameter type
             \param i    The number of the parameter
@@ -85,11 +82,11 @@ namespace meta
     class MetaClass
     {
         friend MetaObject New(const MetaClass &cls);
-        string _name;
+        std::string _name;
         MetaState _staticstate;
 
     protected:
-        map<string, PolyWrapper<IFnWrap> > _methods;
+        std::map<std::string, PolyWrapper<IFnWrap> > _methods;
 
     public:
         /*!
@@ -100,13 +97,13 @@ namespace meta
             Constructor
             \param name     The name of the class
         */
-        MetaClass(const string &name) : _name(name){}
+        MetaClass(const std::string &name) : _name(name){}
         /*!
             Add a method to this class
             \param mnane    The method name
             \param fn       An IFnWrap object for the method
         */
-        void AddMethod(const string &mname, PolyWrapper<IFnWrap> fn)
+        void AddMethod(const std::string &mname, PolyWrapper<IFnWrap> fn)
         {
             fn().SetStatic(false);
             _methods[mname]=fn;
@@ -116,7 +113,7 @@ namespace meta
             \param mname    The function name
             \param fn       An IFnWrap object for the function
         */
-        void AddStatic(const string &mname, PolyWrapper<IFnWrap> fn)
+        void AddStatic(const std::string &mname, PolyWrapper<IFnWrap> fn)
         {
             fn().SetStatic(true);
             _methods[mname]=fn;
@@ -125,25 +122,25 @@ namespace meta
             Get the class name
             \return The class name
         */
-        string GetName() const;
+        std::string GetName() const;
         /*!
             Indexing operator to return static function caller
             \param mname    The function name
             \return A caller for the function
         */
-        virtual Caller operator[](const string &mname);
+        virtual Caller operator[](const std::string &mname);
         /*!
             Check whether this class has a specific method
             \param mname    The method name
             \return true if this class has the method, false otherwise
         */
-        bool HasMethod(const string &mname) const;
+        bool HasMethod(const std::string &mname) const;
         /*!
             Check if a particular method is static
             \param mname    The method name
             \return true if the method is static, false otherwise
         */
-        bool IsStatic(const string &mname) const;
+        bool IsStatic(const std::string &mname) const;
         /*!
             Check a method type
             \param Tret     The return type
@@ -151,7 +148,7 @@ namespace meta
             \param mname    The method name
             \return false if the typecheck fails, true otherwise
         */
-        template<typename Tret, typename Tparam> bool TypeCheck(string mname) const
+        template<typename Tret, typename Tparam> bool TypeCheck(std::string mname) const
         {
             return _methods.find(mname)->second().TypeCheck(TypeID<Tret>(), TypeID<Tparam>());
         }
@@ -160,13 +157,13 @@ namespace meta
             Get information for all methods in the class
             \return a mapping of method names to MethodInfo objects
         */
-        map<string, MethodInfo> GetMethodInfo() const;
+        std::map<std::string, MethodInfo> GetMethodInfo() const;
         /*!
             Get information about a specific method
             \param method   The method name
             \return The MethodInfo for the method
         */
-        MethodInfo GetMethodInfo(const string &method) const;
+        MethodInfo GetMethodInfo(const std::string &method) const;
     };
 }
 #endif // METACLASS_HPP

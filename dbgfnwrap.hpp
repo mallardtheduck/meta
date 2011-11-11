@@ -4,11 +4,10 @@
 #include <typeinfo>
 #include <iostream>
 #include <vector>
+
 #include "comp_util.hpp"
 #include "util.hpp"
 #include "fnwrap.hpp"
-
-using namespace std;
 
 namespace meta
 {
@@ -47,7 +46,7 @@ namespace meta
             Get the 'method' parameter types
             \return The 'method' parameter types
         */
-        vector<PolyWrapper<ITypeInfo> > GetParamTypes()
+        std::vector<PolyWrapper<ITypeInfo> > GetParamTypes()
         {
             return TupleTypes<Tparam>();
         }
@@ -58,15 +57,15 @@ namespace meta
             \param args     The method arguements as a tuple wrapped in an any
             \return A default value
         */
-        any Call(MetaInfo &info, any args)
+        boost::any Call(MetaInfo &info, boost::any args)
         {
-            const Tparam &cargs=any_cast<Tparam>(args);
-            cout << "Meta function call to: " << info.Context.Class.GetName() << "::" << info.Context.MethodName << endl;
-            if (_static) cout << "Method is STATIC." << endl;
-            cout << "Argument types:" << endl;
+            const Tparam &cargs=boost::any_cast<Tparam>(args);
+            std::cout << "Meta function call to: " << info.Context.Class.GetName() << "::" << info.Context.MethodName << std::endl;
+            if (_static) std::cout << "Method is STATIC." << std::endl;
+            std::cout << "Argument types:" << std::endl;
             OutTupleTypes(Tparam());
-            cout << "Arguments:" << (Tparam)cargs << endl;
-            cout << "Return type:" << TypeID<Tret>().Name() << endl;
+            std::cout << "Arguments:" << (Tparam)cargs << std::endl;
+            std::cout << "Return type:" << TypeID<Tret>().Name() << std::endl;
             return Tret();
         }
         /*!
@@ -75,7 +74,7 @@ namespace meta
             \param args     The method arguements as a vector<any>
             \return A default value
         */
-        any Call(MetaInfo &info, many args)
+        boost::any Call(MetaInfo &info, many args)
         {
             return Call(info, many_to_tuple<Tparam>(args));
         }
@@ -107,12 +106,12 @@ namespace meta
             \param args     The method arguements as a tuple wrapped in an any
             \return A default value
         */
-        any Call(MetaInfo &info, any args)
+        boost::any Call(MetaInfo &info, boost::any args)
         {
-            cout << "Meta function call to: " << info.Context.Class.GetName() << "::" << info.Context.MethodName << endl;
-            if (_static) cout << "Method is STATIC." << endl;
-            cout << "No arguements." << endl;
-            cout << "Return type:" << TypeID<Tret>().Name() << endl;
+            std::cout << "Meta function call to: " << info.Context.Class.GetName() << "::" << info.Context.MethodName << std::endl;
+            if (_static) std::cout << "Method is STATIC." << std::endl;
+            std::cout << "No arguements." << std::endl;
+            std::cout << "Return type:" << TypeID<Tret>().Name() << std::endl;
             return Tret();
         }
 
@@ -128,9 +127,9 @@ namespace meta
             Get the 'method' parameter types
             \return The 'method' parameter types
         */
-        vector<PolyWrapper<ITypeInfo> > GetParamTypes()
+        std::vector<PolyWrapper<ITypeInfo> > GetParamTypes()
         {
-            return vector<PolyWrapper<ITypeInfo> >();
+            return std::vector<PolyWrapper<ITypeInfo> >();
         }
 
         /*!
@@ -139,9 +138,9 @@ namespace meta
             \param args     The method arguements as a vector<any>
             \return A default value
         */
-        any Call(MetaInfo &info, many args)
+        boost::any Call(MetaInfo &info, many args)
         {
-            return Call(info, any(NullValue));
+            return Call(info, boost::any(NullValue));
         }
     };
 
