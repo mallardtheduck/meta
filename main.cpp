@@ -88,7 +88,7 @@ int main(int argc, char** argv)
     meta::MetaObject objfoo=meta::New(foo);
     TEST("Construction", ifoo.IsMatch(objfoo));
     TEST_R("Call with parameters/return",
-           objfoo["bar"].Call<string>(MArgs(3, string("hi!"))), string("Hello world!hi!hi!hi!"));
+           objfoo["bar"].Call<string>(MArgs(3,string("hi!"))), string("Hello world!hi!hi!hi!"));
 
     meta::MethodInfo barinfo=objfoo.GetMethodInfo("bar");
     TEST("Reflectivity",barinfo==foo.GetMethodInfo("bar"));

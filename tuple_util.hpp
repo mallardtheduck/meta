@@ -35,11 +35,11 @@ template<typename... V> many variadic_to_many(V... vars){
     return boost::tuples::make_tuple(args...);
 }*/
 
-#define MArgs boost::tuples::make_tuple
+#define MArgs(...) /*tuple_to_many(*/boost::make_tuple(__VA_ARGS__)/*)*/
 
 #else
 
-#define MArgs boost::tuples::make_tuple
+#define MArgs(...) boost::make_tuple(__VA_ARGS__)
 
 #endif
 

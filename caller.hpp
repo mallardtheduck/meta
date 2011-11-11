@@ -33,24 +33,7 @@ namespace meta
         Caller(const std::string &mname, PolyWrapper<IFnWrap> fn, MetaContext context, MetaState &state) :
                 _mname(mname), _fn(fn), _context(context), _state(state) {}
 
-#if !defined(BOOST_NO_VARIADIC_TEMPLATES)
-
-        template<typename Tret, typename... Tparams> Tret operator()(Tparams... params){
-            return operator()<Tret>(variadic_to_many(params...));
-        }
-
-        template<typename Tret, typename... Tparams> Tret Call(Tparams... params){
-            return operator()<Tret>(params...);
-        }
-
-#endif
-
-        /*!
-            Call operator for tuple
-            \param arg  A tuple containing the method arguments
-            \return     The method return value
-        */
-        template<typename Tret, typename Tparam> Tret operator()(Tparam &arg) const
+        template<typename Tret, typename Tparam> Tret Call_Tuple(Tparam arg) const
         {
             if (!_fn().TypeCheck(TypeID<Tret>(),TypeID<Tparam>()))
             {
@@ -64,16 +47,34 @@ namespace meta
                 return Nothing;
             }
             else return boost::any_cast<Tret>(_fn().Call(ifo, boost::any(arg)));
+        }        
+                
+        /*!
+            Call operator for tuple
+            \param arg  A tuple containing the method arguments
+            \return     The method return value
+        */
+        template<typename Tret, typename Tparam> Tret operator()(Tparam arg) const
+        {
+            return Call_Tuple<Tret>(arg);
         }
         /*!
             Call method for tuple
             \param arg  A tuple containing the method arguements
             \return     The method return value
         */
-        template<typename Tret, typename Tparam> Tret Call(Tparam& arg) const
+        template<typename Tret, typename Tparam> Tret Call(Tparam arg) const
         {
-            return operator()<Tret>(arg);
+            return Call_Tuple<Tret>(arg);
         }
+        
+        template<typename Tret> Tret Call_Many(many args) const
+        {
+            _context.ManyArgs=MkConvert(args);
+            MetaInfo ifo(_state, _context);
+            return boost::any_cast<Tret>(_fn().Call(ifo, args));
+        }
+        
         /*!
             Call operator for vector<any> (many).
             \param args     A vector<any> containing the method arguements
@@ -81,9 +82,7 @@ namespace meta
         */
         template<typename Tret> Tret operator()(many args) const
         {
-            _context.ManyArgs=MkConvert(args);
-            MetaInfo ifo(_state, _context);
-            return boost::any_cast<Tret>(_fn().Call(ifo, args));
+            return Call_Many<Tret>(args);
         }
         /*!
             Call method for vector<any> (many).
@@ -92,7 +91,7 @@ namespace meta
         */
         template<typename Tret> Tret Call(many args) const
         {
-            return operator()<Tret>(args);
+            return Call_Many<Tret>(args);
         }
         /*!
             Call operator for tuple with no return value
@@ -160,6 +159,34 @@ namespace meta
             Get the method name
             \return     The method name
         */
+        
+//#if !defined(BOOST_NO_VARIADIC_TEMPLATES)
+        
+        template<typename H> void dbg_v(H h){
+            std::cout << typeid(h).name() << std::endl;
+        }
+        
+        template<typename H, typename... T> void dbg_v(H h, T... t){
+            std::cout << typeid(h).name() << std::endl;
+            dbg_v(t...);
+        }
+        
+        template<typename Tret, typename... Tparams> Tret Call_Variadic(Tparams... params){
+            std::cout << "SIZE:" << sizeof...(Tparams) << std::endl;
+            dbg_v(params...);
+            return Call_Many<Tret>(variadic_to_many(params...));
+        }
+        
+        template<typename Tret, typename Tfirst,typename... Tparams> Tret operator()(Tfirst first, Tparams... params){
+            return Call_Variadic<Tret>(first, params...);
+        }
+
+        template<typename Tret, typename Tfirst, typename... Tparams> Tret Call(Tfirst first, Tparams... params){
+            return Call_Variadic<Tret>(first, params...);
+        }
+
+//#endif
+        
         std::string GetName() const;
         /*!
             Get the method return type
