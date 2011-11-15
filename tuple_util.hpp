@@ -44,6 +44,8 @@ template<typename... V> many variadic_to_many(V... vars){
 
 #endif
 
+#define MParams(...) boost::tuple<__VA_ARGS__>
+
 //! tuple_to_many terminating case
 inline void tuple_to_many(many &m, const boost::tuples::null_type&){}
 
