@@ -149,7 +149,7 @@
 <a name="l00164"></a>00164                 
 <a name="l00165"></a><a class="code" href="classmeta_1_1_caller.html#aeb6714b1e995c45544ce823a27b78c70">00165</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tret, <span class="keyword">typename</span>... Tparams&gt; Tret <a class="code" href="classmeta_1_1_caller.html#aeb6714b1e995c45544ce823a27b78c70" title="Get the method name.">Call_Variadic</a>(Tparams... params){
 <a name="l00166"></a>00166             <span class="comment">//return Call_Many&lt;Tret&gt;(variadic_to_many(params...));</span>
-<a name="l00167"></a>00167             <span class="keywordflow">return</span> <a class="code" href="classmeta_1_1_caller.html#a507b6c4792ff362f79ac158e983ab6ad">Call_Tuple</a>(boost::make_tuple(params...));
+<a name="l00167"></a>00167             <span class="keywordflow">return</span> Call_Tuple&lt;Tret&gt;(boost::make_tuple(params...));
 <a name="l00168"></a>00168         }
 <a name="l00169"></a>00169         
 <a name="l00170"></a><a class="code" href="classmeta_1_1_caller.html#ae28d299d780abff5fc928003df7a163e">00170</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tret, <span class="keyword">typename</span> Tfirst,<span class="keyword">typename</span>... Tparams&gt; Tret <a class="code" href="classmeta_1_1_caller.html#ae28d299d780abff5fc928003df7a163e">operator()</a>(Tfirst first, Tparams... params){
@@ -174,7 +174,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 31 2012 10:16:14 for meta by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 31 2012 21:45:19 for meta by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
