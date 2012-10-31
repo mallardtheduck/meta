@@ -1,4 +1,4 @@
-CC=g++
+CC?=g++
 CFLAGS=-c -Wall -std=gnu++0x
 LDFLAGS=
 LIBFLAGS=-shared
