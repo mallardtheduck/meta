@@ -164,7 +164,7 @@ namespace meta
                 
         template<typename Tret, typename... Tparams> Tret Call_Variadic(Tparams... params){
             //return Call_Many<Tret>(variadic_to_many(params...));
-            return Call_Tuple(boost::make_tuple(params...));
+            return Call_Tuple<Tret>(boost::make_tuple(params...));
         }
         
         template<typename Tret, typename Tfirst,typename... Tparams> Tret operator()(Tfirst first, Tparams... params){
