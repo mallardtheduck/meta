@@ -1,11 +1,12 @@
 CC=g++
 CFLAGS=-c -Wall -std=gnu++0x
 LDFLAGS=
+LIBFLAGS=-shared
 LIBSOURCES=caller.cpp metaclass.cpp metaobject.cpp
 TSTSOURCES=main.cpp
 LIBOBJECTS=$(LIBSOURCES:.cpp=.o)
 TSTOBJECTS=$(TSTSOURCES:.cpp=.o)
-LIB=libmeta.a
+LIB=libmeta.so
 TST=meta-test
 INSTALL_PATH?=/usr/local
 INSTALL_LIBS_DIR=$(INSTALL_PATH)/lib
@@ -14,7 +15,7 @@ INSTALL_HEADERS_DIR=$(INSTALL_PATH)/include/meta
 all: $(LIBSOURCES) $(LIB)
 	
 $(LIB): $(LIBOBJECTS) 
-	ar rcs $@ $^
+	$(CC) $(LDFLAGS) $(LIBFLAGS) $(LIBOBJECTS) -o $@
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
@@ -30,3 +31,6 @@ install: all $(INSTALL_HEADERS_DIR)
 	
 $(INSTALL_HEADERS_DIR):
 	mkdir $(INSTALL_HEADERS_DIR)
+	
+clean:
+	rm -f $(LIB) $(TST) *.o
