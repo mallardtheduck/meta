@@ -1,5 +1,5 @@
 CC?=g++
-CFLAGS=-c -Wall -std=gnu++0x
+CFLAGS=-c -Wall -std=gnu++0x -fPIC
 LDFLAGS=
 LIBFLAGS=-shared
 LIBSOURCES=caller.cpp metaclass.cpp metaobject.cpp
