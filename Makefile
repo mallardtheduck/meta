@@ -6,6 +6,7 @@ LIBSOURCES=caller.cpp metaclass.cpp metaobject.cpp
 TSTSOURCES=main.cpp
 LIBOBJECTS=$(LIBSOURCES:.cpp=.o)
 TSTOBJECTS=$(TSTSOURCES:.cpp=.o)
+TSTLIBS=-lstdc++
 LIB=libmeta.so
 TST=meta-test
 INSTALL_PATH?=/usr/local
@@ -23,7 +24,7 @@ $(LIB): $(LIBOBJECTS)
 tests: $(LIBSOURCES) $(TSTSOURCES) $(TST)
 	
 $(TST): $(LIBOBJECTS) $(TSTOBJECTS) 
-	$(CC) $(LDFLAGS) $(LIBOBJECTS) $(TSTOBJECTS) -o $@
+	$(CC) $(LDFLAGS) $(LIBOBJECTS) $(TSTOBJECTS) $(TSTLIBS) -o $@
 	
 install: all $(INSTALL_HEADERS_DIR)
 	cp $(LIB) $(INSTALL_LIBS_DIR)
